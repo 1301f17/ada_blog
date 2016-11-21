@@ -1,8 +1,7 @@
 {% extends "base.html" %}
-{% load i18n future mezzanine_tags blog_tags keyword_tags disqus_tags %}
+{% load i18n future mezzanine_tags blog_tags keyword_tags disqus_tags solid_util%}
 
 {% block meta_title %}{% if page %}{{ page.meta_title }}{% else %}{% trans "Blog" %}{% endif %}{% endblock %}
-
 {% block meta_keywords %}{% metablock %}
 {% keywords_for page as keywords %}
 {% for keyword in keywords %}
@@ -76,25 +75,35 @@
 
 {% for blog_post in blog_posts.object_list %}
 
-{% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
-{% block blog_post_list_post_featured_image %}
-<p>
-<a href="{{ blog_post.get_absolute_url }}">
-    <img class="img-responsive" src="{{ MEDIA_URL }}{{ blog_post.featured_image }}">
-</a>
-</p>
-{% endblock %}
-{% endif %}
-{% block blog_post_list_post_title %}
-{% editable blog_post.title %}
 
-    <a href="{{ blog_post.get_absolute_url }}"><h3 class="ctitle">{{ blog_post.title }}</h3></a>
 
-{% endeditable %}
-{% endblock %}
+    {% if settings.BLOG_USE_FEATURED_IMAGE and blog_post.featured_image %}
+        {% block blog_post_list_post_featured_image %}
+
+            <p>
+            <a href="{{ blog_post.get_absolute_url }}">
+                <img class="img-responsive" src="{{ MEDIA_URL }}{{ blog_post.featured_image }}">
+            </a>
+            </p>
+        {% endblock %}
+    {% endif %}
+{{ blog_post.description_from_content|safe }}
+
+    {% block blog_post_list_post_title %}
+        {% editable blog_post.title %}
+
+
+            <a href="{{ blog_post.get_absolute_url }}"><div class="temp_1"></div><h3 class="ctitle">{{ blog_post.title }}</h3></a>
+            <div class="temp_2"></div>
+            <div class="temp_3"></div>
+
+        {% endeditable %}
+    {% endblock %}
+
 {% block blog_post_list_post_metainfo %}
-{% editable blog_post.publish_date %}
 
+
+{% editable blog_post.publish_date %}
 	<csmall>
     {% trans "Posted by" %}:
     {% with blog_post.user as author %}
@@ -133,6 +142,7 @@
     {% endif %}
     {% endif %}
        </csmall>
+    
 
 {% endeditable %}
 {% endblock %}
@@ -140,12 +150,32 @@
 
 
 {% block blog_post_list_post_content %}
+
+<div class="temp_4"> 
+
 {% editable blog_post.content %}
-{{ blog_post.description_from_content|safe }}
+
+
+
+
+<!-- 你可以想象我找了多久吗 -->
+
+{{ blog_post|long_description_from_content:5|safe }}
+
+
+<!-- 你可以想象我找了多久吗 -->
+
+
+
 {% endeditable %}
+
+</div>
+
 {% endblock %}
 
 {% block blog_post_list_post_links %}
+
+
 <div class="blog-list-detail">
     {% keywords_for blog_post as tags %}
     {% if tags %}
@@ -159,10 +189,14 @@
     </ul>
     {% endif %}
     <p>
-    <a href="{{ blog_post.get_absolute_url }}">{% trans "[read more]" %}</a>
+    <a href="{{ blog_post.get_absolute_url }}">{% trans "read more>" %}</a>
    
     </p>
 </div>
+
+
+
+
 {% endblock %}
 
 {% endfor %}
@@ -180,3 +214,4 @@
 {% include "blog/includes/filter_panel.html" %}
 {% endblock %}
 </div>
+
