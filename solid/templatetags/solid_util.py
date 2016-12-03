@@ -10,7 +10,7 @@ register = template.Library()
 
 
 @register.filter(name='long_description_from_content')
-def long_description_from_content(item, nlines="5"):
+def long_description_from_content(item, nlines="4"):
     """
     A multi-line version of this:
     https://github.com/stephenmcd/mezzanine/blob/7a33f1a41973a0fc6c54d5d89233c10307d39503/mezzanine/core/models.py#L151
@@ -18,7 +18,7 @@ def long_description_from_content(item, nlines="5"):
     field.
     """
     nlines = int(nlines)
-    max_description_length = 100*nlines
+    max_description_length = nlines
 
     description = ""
 
