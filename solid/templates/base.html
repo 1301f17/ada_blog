@@ -79,13 +79,7 @@
 </div>
 </div>
 {% block title_wrapper%}
-<div id="blue">
-	    <div class="container">
-			<div class="row">
-				<h3>{% block title %}{% endblock %}</h3>
-			</div><!-- /row -->
-	    </div> <!-- /container -->
-	</div>
+
 {% endblock %}
 <div class="container">
 
@@ -111,13 +105,6 @@
 {% block all_content%}
 <div class="container mtb">
 <div class="row">
-{% block left_wrapper%}
-<div class="col-md-{% block left_width %}2{% endblock %} left">
-    {% block left_panel %}
-    <div class="panel panel-default tree">{% page_menu "pages/menus/tree.html" %}</div>
-    {% endblock %}
-</div>
-{% endblock %}
 {% block main_wrapper%}
 <div class="col-md-{% block main_width %} 7 {% endblock %}middle">
     {% block main %}{% endblock %}

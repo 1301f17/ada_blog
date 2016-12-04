@@ -18,7 +18,7 @@ def long_description_from_content(item, nlines="4"):
     field.
     """
     nlines = int(nlines)
-    max_description_length = nlines
+    max_description_length = 10 * nlines
 
     description = ""
 
