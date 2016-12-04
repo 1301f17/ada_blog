@@ -419,10 +419,8 @@ a:focus {
 	display: none;
 }
 
-.blog-list-detail a {
-	position: relative;
-	top: -175px;
-	left: 86%;
+.temp_4 a {
+	float: right;
 }
 
 .blog-list-detail {
